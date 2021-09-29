@@ -1,3 +1,4 @@
+--- The data used was collected from https://ourworldindata.org/covid-deaths
 SELECT * FROM portfolio_project.covidnew_death;
 /*
 Covid 19 Data Exploration 
