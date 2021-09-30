@@ -34,6 +34,8 @@ Where location = 'South Africa';
 
 -- Countries with Highest Infection Rate compared to Population
 
+
+
 Select Location, Population, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population))*100 as PercentPopulationInfected
 From covidenew_death
 WHERE location is not null
@@ -137,5 +139,23 @@ Join covidvaccinations
     and covidenew_death.date = covidvaccinations.date
 where covidenew_death.continent is not null; 
 
+Queries used for Tableau Project
 
+Select SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths)/SUM(New_Cases)*100 as DeathPercentage
+From covidenew_death
+where continent is not null 
+order by 1,2; 
+
+Select location, SUM(new_deaths) as TotalDeathCount
+From covidenew_death
+Where continent is null 
+and location not in ('World', 'European Union', 'International')
+Group by location
+order by TotalDeathCount desc; 
+
+Select Location, Population,date, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population))*100 as PercentPopulationInfected
+From covidenew_death
+where location is not null
+Group by Location, Population, date
+order by PercentPopulationInfected desc; 
 
